@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>rossdomain | window.postMessage</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<style>
+	html{
+		font-family: Verdana, Arial;
+		color: #333;
+		background:#EEE;
+	}
+	#info{
+		color:#00F;
+	}
+	</style>
+</head>
+<body>
+	<p>iframe</p>
+	<button id='trigger'>Send Message</button>
+	<p id='info'></p>
+	<script>
+	(function(){
+		if(!window.postMessage){
+			return;
+		}
+
+		var addEvent = function(type, handle, el){
+				  addEvent = el.addEventListener ? function(type, handle, el){
+						el.addEventListener(type, handle, false);
+					}:function(type, handle, el){
+						el.attachEvent("on" + type, handle);
+					};
+				   addEvent(type ,handle, el);
+			},
+			removeEvent = function(type, handle, el){
+				  addEvent = el.removeEventListener ? function(type, handle, el){
+						el.removeEventListener(type, handle);
+					}:function(type, handle, el){
+						el.detachEvent("on" + type, handle);
+					};
+				   removeEvent(type ,handle, el);
+			}, 
+			info = document.getElementById('info');
+
+		addEvent('message', function(event){
+			if(event.origin == 'http://www.a.com'){
+				info.innerHTML = event.data;
+			}
+		}, window);
+
+		addEvent('click', function(){
+			parent.postMessage('iframe send a message at' + new Date(), 'http://www.a.com');
+		}, document.getElementById('trigger'));
+		
+			
+	})();
+	</script>
+</body>
+</html>

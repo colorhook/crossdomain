@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>rossdomain | window.domain</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<style>
+	html{
+		font-family: Verdana, Arial;
+		color: #333;
+		background:#EEE;
+	}
+	#info{
+		color:#00F;
+	}
+	</style>
+</head>
+<body>
+	<p>iframe</p>
+	<button id='trigger'>Send Message</button>
+	<p id='info'></p>
+	<script>
+	(function(){
+		var addEvent = function(type, handle, el){
+				  addEvent = el.addEventListener ? function(type, handle, el){
+						el.addEventListener(type, handle, false);
+					}:function(type, handle, el){
+						el.attachEvent("on" + type, handle);
+					};
+				   addEvent(type ,handle, el);
+			},
+			removeEvent = function(type, handle, el){
+				  addEvent = el.removeEventListener ? function(type, handle, el){
+						el.removeEventListener(type, handle);
+					}:function(type, handle, el){
+						el.detachEvent("on" + type, handle);
+					};
+				   removeEvent(type ,handle, el);
+			}, 
+			info = document.getElementById('info');
+
+		document.domain = 'a.com';
+		window.handleMessage =function(event){
+				info.innerHTML = event.data;
+		};
+
+		addEvent('click', function(){
+			parent.handleMessage({data: 'iframe send a message at' + new Date()});
+		}, document.getElementById('trigger'));
+		
+	})();
+	</script>
+</body>
+</html>

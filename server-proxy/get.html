@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>crossdomain | Server Proxy (part1: GET)</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<style>
+	body, button{
+		font-family: Verdana, Arial;
+		color: #333;
+	}
+	h1{
+		text-align:center;
+		font-size:24px;
+	}
+	</style>
+</head>
+<body>
+	<h1>crossdomain using Server Proxy (part1: GET)</h1>
+	<button id='get_resource'>Click to get resource</button>
+	<p id='resource_holder'></p>
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+	<script>
+	$('#get_resource').click(function(){
+		$.get('http://www.a.com/crossdomain/server-proxy/proxy.php',
+			{
+				resource: 'http://www.b.com/crossdomain/server-proxy/resource.txt',
+			},
+			function(data){
+				$('#resource_holder').html(data);
+			}
+		);
+	});
+	</script>
+</body>
+</html>

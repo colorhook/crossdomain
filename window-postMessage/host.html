@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>crossdomain | window.postMessage</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<style>
+	body, button{
+		font-family: Verdana, Arial;
+		color: #333;
+	}
+	h1{
+		text-align:center;
+		font-size:24px;
+	}
+	.wrapper{
+		padding:10px;
+		width:640px;
+	}
+	.wrapper, #child{
+		border:#A11111 2px solid;
+	}
+	#info{
+		color:#00F;
+	}
+	</style>
+</head>
+<body>
+	<h1>crossdomain using window.postMessage</h1>
+	<div class='wrapper'>
+		<p>Host window</p>
+		<button id='trigger'>Send Message</button>
+		<p id='info'></p>
+		<iframe width='600' height='140' 
+		id='child' src='http://www.b.com/crossdomain/window-postMessage/iframe.html'></iframe>
+	</div>
+	<script>
+	(function(){
+		var iframe = document.getElementById('child');
+		if(!window.postMessage){
+			alert('window.postMessage didn\'t supported by this browser');
+			iframe.parent.removeChild(iframe);
+			return;
+		}
+		
+
+		var addEvent = function(type, handle, el){
+				  addEvent = el.addEventListener ? function(type, handle, el){
+						el.addEventListener(type, handle, false);
+					}:function(type, handle, el){
+						el.attachEvent("on" + type, handle);
+					};
+				   addEvent(type ,handle, el);
+			},
+			removeEvent = function(type, handle, el){
+				  addEvent = el.removeEventListener ? function(type, handle, el){
+						el.removeEventListener(type, handle);
+					}:function(type, handle, el){
+						el.detachEvent("on" + type, handle);
+					};
+				   removeEvent(type ,handle, el);
+			},
+			info = document.getElementById('info');
+		
+		addEvent('message', function(event){
+			if(event.origin == 'http://www.b.com'){
+				info.innerHTML = event.data;
+			}
+		}, window);
+		addEvent('load', function(event){
+			addEvent('click', function(){
+				iframe.contentWindow.postMessage('host send a message at' + new Date(), 'http://www.b.com');
+			}, document.getElementById('trigger'));
+		}, iframe);
+	})();
+	</script>
+	
+</body>
+</html>
