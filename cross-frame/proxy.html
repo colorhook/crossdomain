@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head><title></title></head>
+  <body>
+    <script type="text/javascript">
+
+(function () {
+
+    var r, o, t;
+
+    // This function is copied from yahoo.js.
+    // This keeps this file free of dependencies.
+    function hasOwnProperty(o, prop) {
+
+        if (Object.prototype.hasOwnProperty) {
+            return o.hasOwnProperty(prop);
+        }
+
+        return typeof o[prop] !== "undefined" &&
+                o.constructor.prototype[prop] !== o[prop];
+    }
+
+    function parseQueryString(s) {
+
+        var r, a, p;
+
+        r = {};
+        a = s.split('&');
+        for (i = 0; i < a.length; i++) {
+            p = a[i].split('=');
+            if (p.length === 2 && p[0].length > 0) {
+                r[p[0]] = unescape(p[1]);
+            }
+        }
+
+        return r;
+    }
+
+    // Match things like parent.frames["aaa"].top.frames[0].frames['bbb']
+    r = /^(?:(?:(top|parent|frames\[(?:(?:['"][a-zA-Z\d-_]*['"])|\d+)\]))(?:\.|$))+/;
+
+    o = parseQueryString(location.hash.substr(1));
+
+    // The following properties may be missing as a result of preloading
+    // this file for example. Simply do nothing in that case...
+    if (hasOwnProperty(o, "target") && hasOwnProperty(o, "message") &&
+        hasOwnProperty(o, "domain") && hasOwnProperty(o, "uri")) {
+
+        if (!r.test(o.target)) {
+            throw new Error("Invalid target: " + o.target);
+        }
+
+        // Safe to eval...
+        t = eval("parent." + o.target);
+
+        // Let the application know a message has been received.
+        t.YAHOO.util.CrossFrame.onMessageEvent.fire(o.message, o.domain, o.uri);
+    }
+
+})();
+
+    </script>
+  </body>
+</html>

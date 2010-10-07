@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>crossdomain | window name</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<style>
+	body, button{
+		font-family: Verdana, Arial;
+		color: #333;
+	}
+	h1{
+		text-align:center;
+		font-size:24px;
+	}
+	</style>
+</head>
+<body>
+	<h1>crossdomain using window.name</h1>
+	<button id='get_resource'>Click to get resource</button>
+	<p id='resource_holder'></p>
+    <script type="text/javascript">
+(function () {
+   var proxy = 'blank.html',
+        button = document.getElementById('get_resource'),
+		holder = document.getElementById('resource_holder')
+        body = document.body || document.getElementsByTagName('body')[0],
+		getPageData = function(url, callback){
+			var iframe = document.createElement('iframe'),
+				 state = 0,
+
+				 onIframeLoaded = function(){
+					try{
+						if(iframe.contentWindow.location =='about:blank'){
+							return;
+						}
+					}catch(e){}
+					if(!state){
+						 state=1;
+						 iframe.contentWindow.location = proxy;
+					}
+					try{
+						 if(state<2){
+							getData();
+						  }
+					 }catch(e){}
+				 },
+
+				 getData = function(){
+					 var data = iframe.contentWindow.name;
+					 if(typeof data == 'string'){
+							state = 2; 
+							callback(data);
+					  }
+				  }
+
+			iframe.style.display = 'none';
+			iframe.src=url;
+
+			 if(iframe.addEventListener){
+				iframe.addEventListener("load",onIframeLoaded,false);
+			}else{
+				iframe.attachEvent("onload",onIframeLoaded);
+			}
+			body.appendChild(iframe);
+		}
+		button.onclick = function(){
+			holder.innerHTML = '';
+			getPageData('http://www.b.com/crossdomain/window-name/data.html', function(data){
+				holder.innerHTML = new Date() + ": " + data;
+			});
+		}
+})();
+	</script>
+	
+</body>
+</html>

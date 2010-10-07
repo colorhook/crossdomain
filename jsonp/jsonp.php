@@ -1,4 +1,7 @@
 <?php
+/**
+ *
+ */
 $callback = isset($_GET['callback']) ? $_GET['callback'] : '';
 $arraydata = array(
 	'timestamp' => strftime ('%X'),

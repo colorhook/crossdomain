@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>rossdomain | cross frame</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<style>
+	html{
+		font-family: Verdana, Arial;
+		color: #333;
+		background:#EEE;
+	}
+	#info{
+		color:#00F;
+	}
+	</style>
+</head>
+<body>
+	<p>iframe</p>
+	<button id='trigger'>Send Message</button>
+	<p id='info'></p>
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.3.1/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+    <script type="text/javascript" src="cross-frame.js"></script>
+    <script type="text/javascript">
+(function () {
+
+    var proxy = 'http://www.a.com/crossdomain/cross-frame/proxy.html',
+		 target = "parent",
+		 msg = 'iframe send a message at ';
+
+    YAHOO.util.Event.addListener("trigger", "click", function (evt) {
+        YAHOO.util.Event.stopEvent(evt);
+        YAHOO.util.CrossFrame.send(proxy, target,  msg + new Date());
+    });
+
+    YAHOO.util.CrossFrame.onMessageEvent.subscribe(function (type, args, obj) {
+        var message = args[0];
+        var domain = args[1];
+        YAHOO.util.Dom.get("info").innerHTML = message + " (from domain " + domain + ")";
+    });
+
+})();
+	</script>
+</body>
+</html>

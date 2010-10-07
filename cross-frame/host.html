@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>crossdomain | cross frame</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<style>
+	body, button{
+		font-family: Verdana, Arial;
+		color: #333;
+	}
+	h1{
+		text-align:center;
+		font-size:24px;
+	}
+	.wrapper{
+		padding:10px;
+		width:640px;
+	}
+	.wrapper, #child{
+		border:#A11111 2px solid;
+	}
+	#info{
+		color:#00F;
+	}
+	</style>
+</head>
+<body>
+	<h1>crossdomain using cross-frame.js</h1>
+	<div class='wrapper'>
+		<p>Host window</p>
+		<button id='trigger'>Send Message</button>
+		<p id='info'></p>
+		<iframe name='child' width='600' height='140' 
+		id='child' src='http://www.b.com/crossdomain/cross-frame/iframe.html'></iframe>
+	</div>
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.3.1/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+    <script type="text/javascript" src="cross-frame.js"></script>
+    <script type="text/javascript">
+(function () {
+
+    var proxy = 'http://www.b.com/crossdomain/cross-frame/proxy.html',
+		 target = "frames['child']",
+		 msg = 'host send a message at ';
+
+    YAHOO.util.Event.addListener("trigger", "click", function (evt) {
+        YAHOO.util.Event.stopEvent(evt);
+        YAHOO.util.CrossFrame.send(proxy , target, msg + new Date());
+    });
+
+    YAHOO.util.CrossFrame.onMessageEvent.subscribe(function (type, args, obj) {
+        var message = args[0];
+        var domain = args[1];
+        YAHOO.util.Dom.get("info").innerHTML = message + " (from domain " + domain + ")";
+    });
+
+})();
+	</script>
+	
+</body>
+</html>

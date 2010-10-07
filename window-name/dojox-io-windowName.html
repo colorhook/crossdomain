@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>crossdomain | dojox.io.windowName</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<style>
+	body, button{
+		font-family: Verdana, Arial;
+		color: #333;
+	}
+	h1{
+		text-align:center;
+		font-size:24px;
+	}
+	</style>
+</head>
+<body>
+	<h1>crossdomain using dojox.io.windowName</h1>
+	<button id='get_resource'>Click to get resource</button>
+	<p id='resource_holder'></p>
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js"></script>
+	<script>
+	dojo.require('dojox.io.windowName');
+	dojo.config.dojoCallbackUrl = 'blank.html';
+	dojo.addOnLoad(function () {
+		var button = dojo.byId('get_resource'),
+			 holder = dojo.byId('resource_holder'),
+
+			 fetchData = function(){
+				holder.innerHTML = '';
+				var handler = dojox.io.windowName.send("GET", {url:"http://www.b.com/crossdomain/window-name/data.html"});
+				handler.addCallback(function(data){
+					holder.innerHTML =new Date() + " :" + data;
+				});
+			 };
+		
+		dojo.connect(button, 'click', fetchData);
+	});
+	</script>
+	
+</body>
+</html>
