@@ -1,1 +1,0 @@
-cross frame: http://www.julienlecomte.net/blog/2007/11/31/
