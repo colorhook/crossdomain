@@ -1,0 +1,13 @@
+<h4>1. Server Proxy</h4>
+Server Proxy的方式是使用服务器做代理中专，让跨域变得没有跨域。
+<h4>3. JSONP</h4>
+JSONP (JSON with padding)
+<h4>4. Flash URLLoader</h4>
+<h4>2. Access Control</h4>
+<h4>5. window.name</h4>
+
+<h4>6. window.domain</h4>
+<h4>7. window.postMessage</h4>
+<h4>8. FIM - Fragment Identiter Message</h4>
+<h4>9. Flash LocalConnection</h4>
+<h4>10. Cross Frame</h4>
