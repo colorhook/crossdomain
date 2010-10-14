@@ -1,6 +1,11 @@
-<h4>1. Server Proxy</h4>
-Server Proxy的方式是使用服务器做代理中专，让跨域变得没有跨域。
-<h4>3. JSONP</h4>
+h2. How to share resources cross domain
+
+This is a case collection for sharing resources between different domains.
+
+h3. Server Proxy
+Server Proxy is using web server to request data from other domain(s) and than provider to self domain,.
+JavaScript needn't create a cross-domain HTTP request but just retrieve data from local host.
+h3. JSONP</h4>
 JSONP (JSON with padding)
 <h4>4. Flash URLLoader</h4>
 <h4>2. Access Control</h4>

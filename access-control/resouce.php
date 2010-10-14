@@ -1,4 +1,11 @@
 <?php
+/*
+ * Copyright (c) 2010 the original author or authors
+ * @author colorhook@gmail.com
+ *
+ * Permission is hereby granted to use, modify, and distribute this file
+ * in accordance with the terms of the license agreement accompanying it.
+ */
 header("Access-Control-Allow-Origin: http://www.a.com");
 //header("Access-Control-Allow-Method: POST");
 //header("Access-Control-Allow-Headers: X-PINGOTHER");

@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>crossdomain | Flash LocalConnection</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<style>
+	html{
+		font-family: Verdana, Arial;
+		color: #333;
+		background:#EEE;
+	}
+	#info{
+		color:#00F;
+	}
+	</style>
+</head>
+<body>
+	<p>iframe</p>
+	<button id='trigger'>Send Message</button>
+	<p id='info'></p>
+	<div id='boundingBox'></div>
+	<script type="text/javascript" src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js"></script> 
+	<script src='LocalConnector.js'></script>
+	<script>
+	YUI().use('base', 'local-connector', function(Y){
+
+			var swfURL = 'localconnector.swf',
+			     info = Y.one('#info'),
+				 button = Y.one('#trigger'),
+				 connector = new Y.LocalConnector({
+					boundingBox: Y.one('#boundingBox'),
+					selfName: '_endpoint2',
+					targetName: '_endpoint1',
+					allowDomain: 'www.a.com',
+					swfURL: swfURL
+				});
+			
+			connector.on('swfReady', function(){
+				button.on('click', function(){
+					connector.sendMessage("host message");
+				});
+			});
+			connector.on('message', function(event){
+				info.set('innerHTML', "receive message: "+ event.message + new Date());
+			});
+	});
+	</script>
+	</script>
+</body>
+</html>
