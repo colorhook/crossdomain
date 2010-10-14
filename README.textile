@@ -3,23 +3,28 @@ h2. How to share resources crossing domain
 These code snippet are a case collection for sharing resources between different domains.
 
 h3. Server Proxy
+
 Server Proxy is using web server to request data from other domain(s) and than provider to self domain,.
 JavaScript needn't create a cross-domain HTTP request but just retrieve data from local host.
 
 h3. JSONP
-JSONP (JSON with padding) is a easy method, using JavaScript annotation, to share data cross domain.
+
+ SONP (JSON with padding) is a easy method, using JavaScript annotation, to share data cross domain.
 JavaScript can be load from another domain but has no restriction to execution.
 
 h3. Flash URLLoader
+
 Flash has another security policy, it's can load form another domain by setting the policy flie crossdomain.xml.
 
 h3. Access Control
+
 After setting specific HTTP response headers, the resource can to shared to other domains.
 
 h3. window.domain
 domain and sub-domain can conmunicate each by setting their window's domain property to the same.
 
 h3. window.name
+
 In a window frame, we can assign value to the name property and then change the location URL to the same domain
 as parent window frame, then the parent can read the name property. this is a efficient method to share data cross domain.
 
@@ -27,14 +32,17 @@ h3. window.postMessage
 window.postMessage is a newer method, has less browsers support at present,  to share data between domains.
 
 h3. FIM - Fragment Identiter Message
+
 the containing page sets the URL fragment identifier of an embedded IFrame, and the IFrame must poll to detect changes 
 in the value of its location.hash property. this technique allow two-way comunications.
 
 h3. Flash LocalConnection
+
 We can using Flash LocalConnection API to communicate cross domain, this API allow different SWF call each other, the SWF 
 can be embeded in HTML page, or play in a standlone player.
 
 h3. Cross Frame
+
 Cross Frame is a variant of the URL fragment identifier mechanism, which add a blank iframe as a proxy, no extra history records occur
 and needn't polling the location hash chang. It however cannot work on Opera, so we need using an other way for Opera browser.
 see http://www.julienlecomte.net/blog/2007/11/31/
