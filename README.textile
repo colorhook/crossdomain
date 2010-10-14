@@ -9,7 +9,7 @@ JavaScript needn't create a cross-domain HTTP request but just retrieve data fro
 
 h3. JSONP
 
- SONP (JSON with padding) is a easy method, using JavaScript annotation, to share data cross domain.
+JSONP (JSON with padding) is a easy method, using JavaScript annotation, to share data cross domain.
 JavaScript can be load from another domain but has no restriction to execution.
 
 h3. Flash URLLoader
@@ -21,6 +21,7 @@ h3. Access Control
 After setting specific HTTP response headers, the resource can to shared to other domains.
 
 h3. window.domain
+
 domain and sub-domain can conmunicate each by setting their window's domain property to the same.
 
 h3. window.name
@@ -29,6 +30,7 @@ In a window frame, we can assign value to the name property and then change the 
 as parent window frame, then the parent can read the name property. this is a efficient method to share data cross domain.
 
 h3. window.postMessage
+
 window.postMessage is a newer method, has less browsers support at present,  to share data between domains.
 
 h3. FIM - Fragment Identiter Message
