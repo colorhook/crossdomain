@@ -4,7 +4,7 @@ These code snippet are a case collection for sharing resources between different
 
 h3. Server Proxy
 
-Server Proxy is using web server to request data from other domain(s) and than provider to self domain,.
+Server Proxy is using web server to request data from other domain(s) and than provide to self domain,
 JavaScript needn't create a cross-domain HTTP request but just retrieve data from local host.
 
 h3. JSONP
@@ -14,7 +14,7 @@ JavaScript can be load from another domain but has no restriction to execution.
 
 h3. Flash URLLoader
 
-Flash has another security policy, it's can load form another domain by setting the policy flie crossdomain.xml.
+Flash has another security policy, it's can load data from another domain by setting the policy flie crossdomain.xml.
 
 h3. Access Control
 
@@ -22,7 +22,7 @@ After setting specific HTTP response headers, the resource can to shared to othe
 
 h3. window.domain
 
-domain and sub-domain can conmunicate each by setting their window's domain property to the same.
+domain and sub-domain can conmunicate each other after setting their window's domain property to the same.
 
 h3. window.name
 
@@ -31,7 +31,7 @@ as parent window frame, then the parent can read the name property. this is a ef
 
 h3. window.postMessage
 
-window.postMessage is a newer method, has less browsers support at present,  to share data between domains.
+window.postMessage is a newer method, which has less browsers support at present,  to share data between domains.
 
 h3. FIM - Fragment Identiter Message
 
@@ -40,7 +40,7 @@ in the value of its location.hash property. this technique allow two-way comunic
 
 h3. Flash LocalConnection
 
-We can using Flash LocalConnection API to communicate cross domain, this API allow different SWF call each other, the SWF 
+We can using Flash LocalConnection API to communicate crossing domain, this API allow different SWF call each other, the SWF 
 can be embeded in HTML page, or play in a standlone player.
 
 h3. Cross Frame
