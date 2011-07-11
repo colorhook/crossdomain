@@ -48,3 +48,11 @@ h3. Cross Frame
 Cross Frame is a variant of the URL fragment identifier mechanism, which add a blank iframe as a proxy, no extra history records occur
 and needn't polling the location hash chang. It however cannot work on Opera, so we need using an other way for Opera browser.
 see http://www.julienlecomte.net/blog/2007/11/31/
+
+h3. YQL
+
+YQL (Yahoo! Query Language) is an expressive SQL-like language that lets you query, filter, and join data across Web services.
+Yahoo! and other websites across the Internet make much of their structured data available to developers, primarily through Web services. To access and query these services, developers traditionally endure the pain of locating the right URLs and documentation to access and query each Web service.
+With YQL, developers can access and shape data across the Internet through one simple language, eliminating the need to learn how to call different APIs.
+see http://developer.yahoo.com/yql/
+YQL console http://developer.yahoo.com/yql/console/

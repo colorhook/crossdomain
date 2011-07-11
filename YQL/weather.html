@@ -1,0 +1,74 @@
+<!doctype>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jsxml example - Yahoo weather</title>
+</head>
+<style>
+html{
+	background:#f2f2f2;
+}
+body{
+	padding-top:20px;
+	width:960px;
+	margin:0 auto;
+	text-align:center;
+	color:#404040;
+	font-family: 'Microsoft Yahei', Verdana, Arial;
+	text-shadow:#fff 1px 0px 1px;
+}
+
+ol{
+	list-style:none;
+}
+
+#container{
+	text-align:left;
+}
+</style>
+<body>
+<h1>jsxml example - Yahoo weather</h1>
+<button id="btn">fetch weather data</button>
+<div id="container">
+</div>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/yui/3.3.0/yui-min.js"></script>
+<script>
+YUI().use('node-base', 'yql', 'substitute', function(Y){
+	//http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20location%3D'CHXX0044'
+	var query = "select * from weather.forecast where location='CHXX0044'";
+	var init = function(data){
+		var list = data.channel.item.forecast,
+			template = "{date}，{day}，天气{weather}，最高气温{high}，最低气温{low}。",
+			innerHTML = '<h2>'+data.channel.item.title+'</h1>';
+
+		innerHTML += '<h3>天气预报</h3><ol>';
+		
+		for(var i = 0, l = list.length; i < l; i++){
+			var item = list[i];
+			var html = Y.substitute(template, {
+				date: item.date,
+				day: item.day,
+				high: item.high,
+				low: item.low,
+				weather: item.text
+			});
+			innerHTML += '<li>'+html +'</li>';
+		}
+		innerHTML += '</ol>';
+		innerHTML += "<h3>详情</h3>";
+		innerHTML += "<div>"+data.channel.item.description + "</div>";
+		Y.one('#container').setContent(innerHTML);
+	};
+	var getWeather = function(){
+		Y.one('#container').setContent('start fetching weather data...');
+		Y.YQL(query, function(r){
+			init(r.query.results);
+		});
+	}
+	Y.one('#btn').on('click', function(e){
+		getWeather();
+	});
+});
+</script>
+</body>
+</html>
