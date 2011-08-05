@@ -30,7 +30,7 @@
 				   addEvent(type ,handle, el);
 			},
 			removeEvent = function(type, handle, el){
-				  addEvent = el.removeEventListener ? function(type, handle, el){
+				  removeEvent = el.removeEventListener ? function(type, handle, el){
 						el.removeEventListener(type, handle);
 					}:function(type, handle, el){
 						el.detachEvent("on" + type, handle);
